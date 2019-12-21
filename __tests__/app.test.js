@@ -34,7 +34,7 @@ describe('app routes', () => {
 
     await agent
       .post('/api/v1/auth/signup')
-      .send({ email: 'test@test.com', password: 'password' });
+      .send({ email: 'test@tet.com', password: 'password' });
     return agent
       .post('/api/v1/records')
       .send({
@@ -86,8 +86,13 @@ describe('app routes', () => {
         });
       });
   });
-  it('updates a record', () => {
-    return request(app)
+  it('updates a record', async() => {
+    const agent = request.agent(app)
+
+    await agent
+      .post('/api/v1/auth/signup')
+      .send({ email: 'test@tet.com', password: 'password' });
+    return agent
       .patch(`/api/v1/records/${record.id}`)
       .send({ title: 'Monster Movie' })
       .then(res => {
@@ -102,8 +107,13 @@ describe('app routes', () => {
         });
       });
   });
-  it('deletes a record', () => {
-    return request(app)
+  it('deletes a record', async() => {
+    const agent = request.agent(app)
+
+    await agent
+      .post('/api/v1/auth/signup')
+      .send({ email: 'test@tet.com', password: 'password' });
+    return agent
       .delete(`/api/v1/records/${record.id}`)
       .then(res => {
         expect(res.body).toEqual({
