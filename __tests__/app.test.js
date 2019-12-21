@@ -6,6 +6,7 @@ const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 const Record = require('../lib/models/Record');
 
+
 describe('app routes', () => {
   beforeAll(() => {
     connect();
@@ -28,8 +29,13 @@ describe('app routes', () => {
   afterAll(() => {
     return mongoose.connection.close();
   });
-  it('can create a new record', () => {
-    return request(app)
+  it('can create a new record', async() => {
+    const agent = request.agent(app)
+
+    await agent
+      .post('/api/v1/auth/signup')
+      .send({ email: 'test@test.com', password: 'password' });
+    return agent
       .post('/api/v1/records')
       .send({
         title: 'Ege Bamyasi',
@@ -53,6 +59,52 @@ describe('app routes', () => {
   it('gets a record by id', () => {
     return request(app)
       .get(`/api/v1/records/${record.id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id:record.id,
+          title: 'Ege Bamyasi',
+          artist: 'Can',
+          artist_url: 'https://api.discogs.com/artists/17203',
+          versions_url: 'https://api.discogs.com/masters/11693/versions',
+          year: 1972,
+          __v: 0
+        });
+      });
+  });
+  it('gets all records', () => {
+    return request(app)
+      .get('/api/v1/records')
+      .then(res => {
+        expect(res.body).toContainEqual({
+          _id: expect.any(String),
+          title: 'Ege Bamyasi',
+          artist: 'Can',
+          artist_url: 'https://api.discogs.com/artists/17203',
+          versions_url: 'https://api.discogs.com/masters/11693/versions',
+          year: 1972,
+          __v: 0
+        });
+      });
+  });
+  it('updates a record', () => {
+    return request(app)
+      .patch(`/api/v1/records/${record.id}`)
+      .send({ title: 'Monster Movie' })
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: expect.any(String),
+          title: 'Monster Movie',
+          artist: 'Can',
+          artist_url: 'https://api.discogs.com/artists/17203',
+          versions_url: 'https://api.discogs.com/masters/11693/versions',
+          year: 1972,
+          __v: 0
+        });
+      });
+  });
+  it('deletes a record', () => {
+    return request(app)
+      .delete(`/api/v1/records/${record.id}`)
       .then(res => {
         expect(res.body).toEqual({
           _id:record.id,
