@@ -20,8 +20,8 @@ describe('app routes', () => {
     record = await Record.create({
       title: 'Ege Bamyasi',
       artist: 'Can',
-      artist_url: 'https://api.discogs.com/artists/17203',
-      versions_url: 'https://api.discogs.com/masters/11693/versions',
+      artist_id: 17203,
+      master_id: 11693,
       year: 1972
     });
   });
@@ -40,8 +40,8 @@ describe('app routes', () => {
       .send({
         title: 'Ege Bamyasi',
         artist: 'Can',
-        artist_url: 'https://api.discogs.com/artists/17203',
-        versions_url: 'https://api.discogs.com/masters/11693/versions',
+        artist_id: 17203,
+        master_id: 11693,
         year: 1972
       })
       .then(res => {
@@ -49,8 +49,8 @@ describe('app routes', () => {
           _id: expect.any(String),
           title: 'Ege Bamyasi',
           artist: 'Can',
-          artist_url: 'https://api.discogs.com/artists/17203',
-          versions_url: 'https://api.discogs.com/masters/11693/versions',
+          artist_id: 17203,
+          master_id: 11693,
           year: 1972,
           __v: 0
         });
@@ -64,8 +64,8 @@ describe('app routes', () => {
           _id:record.id,
           title: 'Ege Bamyasi',
           artist: 'Can',
-          artist_url: 'https://api.discogs.com/artists/17203',
-          versions_url: 'https://api.discogs.com/masters/11693/versions',
+          artist_id: 17203,
+          master_id: 11693,
           year: 1972,
           __v: 0
         });
@@ -79,8 +79,8 @@ describe('app routes', () => {
           _id: expect.any(String),
           title: 'Ege Bamyasi',
           artist: 'Can',
-          artist_url: 'https://api.discogs.com/artists/17203',
-          versions_url: 'https://api.discogs.com/masters/11693/versions',
+          artist_id: 17203,
+          master_id: 11693,
           year: 1972,
           __v: 0
         });
@@ -100,8 +100,8 @@ describe('app routes', () => {
           _id: expect.any(String),
           title: 'Monster Movie',
           artist: 'Can',
-          artist_url: 'https://api.discogs.com/artists/17203',
-          versions_url: 'https://api.discogs.com/masters/11693/versions',
+          artist_id: 17203,
+          master_id: 11693,
           year: 1972,
           __v: 0
         });
@@ -119,8 +119,8 @@ describe('app routes', () => {
           _id:record.id,
           title: 'Ege Bamyasi',
           artist: 'Can',
-          artist_url: 'https://api.discogs.com/artists/17203',
-          versions_url: 'https://api.discogs.com/masters/11693/versions',
+          artist_id: 17203,
+          master_id: 11693,
           year: 1972,
           __v: 0
         });
