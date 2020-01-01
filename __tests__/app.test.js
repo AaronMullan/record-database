@@ -30,7 +30,7 @@ describe('app routes', () => {
     return mongoose.connection.close();
   });
   it('can create a new record', async() => {
-    const agent = request.agent(app)
+    const agent = request.agent(app);
 
     await agent
       .post('/api/v1/auth/signup')
@@ -87,7 +87,7 @@ describe('app routes', () => {
       });
   });
   it('updates a record', async() => {
-    const agent = request.agent(app)
+    const agent = request.agent(app);
 
     await agent
       .post('/api/v1/auth/signup')
@@ -108,8 +108,7 @@ describe('app routes', () => {
       });
   });
   it('deletes a record', async() => {
-    const agent = request.agent(app)
-
+    const agent = request.agent(app);
     await agent
       .post('/api/v1/auth/signup')
       .send({ email: 'test@tet.com', password: 'password' });
