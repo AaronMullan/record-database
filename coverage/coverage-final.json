@@ -1,1 +1,2 @@
-{}
+{"/Users/aaronmullan/alchemy/record-collection/record-database/lib/models/Record.js": {"path":"/Users/aaronmullan/alchemy/record-collection/record-database/lib/models/Record.js","statementMap":{"0":{"start":{"line":1,"column":17},"end":{"line":1,"column":36}},"1":{"start":{"line":3,"column":15},"end":{"line":17,"column":2}},"2":{"start":{"line":19,"column":0},"end":{"line":19,"column":50}}},"fnMap":{},"branchMap":{},"s":{"0":4,"1":4,"2":4},"f":{},"b":{},"_coverageSchema":"43e27e138ebf9cfc5966b082cf9a028302ed4184","hash":"912b061b10f2e51555fb40f6fd7b6ac02349add0"}
+}

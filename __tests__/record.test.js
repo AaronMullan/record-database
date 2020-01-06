@@ -18,6 +18,7 @@ describe('app routes', () => {
     record = await Record.create({
       title: 'Ege Bamyasi',
       artist: 'Can',
+      label: 'United Artists',
       artist_id: 17203,
       master_id: 11693,
       year: 1972
@@ -37,6 +38,7 @@ describe('app routes', () => {
       .post('/api/v1/records')
       .send({
         title: 'Ege Bamyasi',
+        label: 'United Artists',
         artist: 'Can',
         artist_id: 17203,
         master_id: 11693,
@@ -46,6 +48,7 @@ describe('app routes', () => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           title: 'Ege Bamyasi',
+          label: 'United Artists',
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
@@ -61,6 +64,7 @@ describe('app routes', () => {
         expect(res.body).toEqual({
           _id:record.id,
           title: 'Ege Bamyasi',
+          label: 'United Artists',
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
@@ -76,6 +80,7 @@ describe('app routes', () => {
         expect(res.body).toContainEqual({
           _id: expect.any(String),
           title: 'Ege Bamyasi',
+          label: 'United Artists',
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
@@ -97,6 +102,7 @@ describe('app routes', () => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           title: 'Monster Movie',
+          label: 'United Artists',
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
@@ -116,6 +122,7 @@ describe('app routes', () => {
         expect(res.body).toEqual({
           _id:record.id,
           title: 'Ege Bamyasi',
+          label: 'United Artists',
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
