@@ -10,14 +10,19 @@ describe('label routes', () => {
   beforeAll(() => {
     connect();
   });
+  beforeEach(() => {
+    return mongoose.connection.dropDatabase();
+  });
 
   let label;
   beforeEach(async() => {
     label = await Label.create({
       name: 'Arbitrary Signs',
-      city: 'Northampton',
-      state: 'Massachusetts',
-      country: 'USA'
+      address: [ 
+        { city: 'Northampton' },
+        { state: 'Massachusetts' },
+        { country: 'USA' }
+      ]
     });
   });
 
@@ -39,12 +44,47 @@ describe('label routes', () => {
         _id: expect.any(String),
         name: 'Arbitrary Minds',
         address: [ 
-          {  _id: expect.any(String), city: 'Northampton' },
-          {  _id: expect.any(String), state: 'Massachusetts' },
-          {  _id: expect.any(String), country: 'USA' }
+          {  city: 'Northampton' },
+          {  state: 'Massachusetts' },
+          {  country: 'USA' }
         ],
         __v: 0
       });
       });
   });
+
+  it('gets all labels', () => {
+    return request(app)
+      .get('/api/v1/labels')
+      .then(res => {
+        expect(res.body).toContainEqual({
+          _id: expect.any(String),
+          name: 'Arbitrary Signs',
+          address: [ 
+            {  city: 'Northampton' },
+            {  state: 'Massachusetts' },
+            {  country: 'USA' }
+          ],
+          __v: 0
+        });    
+      });
+  });
+  it('gets a label by id', () => {
+    return request(app)
+      .get(`/api/v1/labels/${label.id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: label.id,
+          name: 'Arbitrary Signs',
+          address: [ 
+            {  city: 'Northampton' },
+            {  state: 'Massachusetts' },
+            {  country: 'USA' }
+          ],
+          __v: 0
+        });    
+      });
+
+  });
 });
+

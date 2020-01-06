@@ -1,53 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1578347160750" clover="3.2.0">
-  <project timestamp="1578347160750" name="All files">
-    <metrics statements="29" coveredstatements="20" conditionals="2" coveredconditionals="0" methods="10" coveredmethods="2" elements="41" coveredelements="22" complexity="0" loc="29" ncloc="29" packages="3" files="3" classes="3"/>
-    <package name="lib">
-      <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="app.js" path="/Users/aaronmullan/alchemy/record-collection/record-database/lib/app.js">
-        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="6" count="3" type="stmt"/>
-        <line num="8" count="3" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
-        <line num="10" count="3" type="stmt"/>
-        <line num="12" count="3" type="stmt"/>
-        <line num="13" count="3" type="stmt"/>
-        <line num="15" count="3" type="stmt"/>
-      </file>
-    </package>
-    <package name="lib.models">
+<coverage generated="1578349295646" clover="3.2.0">
+  <project timestamp="1578349295646" name="All files">
+    <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="4" coveredelements="4" complexity="0" loc="4" ncloc="4" packages="1" files="1" classes="1"/>
+    <file name="Label.js" path="/Users/aaronmullan/alchemy/record-collection/record-database/lib/models/Label.js">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="Label.js" path="/Users/aaronmullan/alchemy/record-collection/record-database/lib/models/Label.js">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="10" count="3" type="stmt"/>
-        <line num="18" count="3" type="stmt"/>
-      </file>
-    </package>
-    <package name="lib.routes">
-      <metrics statements="14" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="10" coveredmethods="2"/>
-      <file name="labels.js" path="/Users/aaronmullan/alchemy/record-collection/record-database/lib/routes/labels.js">
-        <metrics statements="14" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="10" coveredmethods="2"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-      </file>
-    </package>
+      <line num="1" count="3" type="stmt"/>
+      <line num="3" count="3" type="stmt"/>
+      <line num="10" count="3" type="stmt"/>
+      <line num="18" count="3" type="stmt"/>
+    </file>
   </project>
 </coverage>
