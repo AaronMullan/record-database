@@ -12,9 +12,7 @@ describe('app routes', () => {
     connect();
   });
 
-  beforeEach(() => {
-    return mongoose.connection.dropDatabase();
-  });
+  
   let record;
   beforeEach(async() => {
     record = await Record.create({
