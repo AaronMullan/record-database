@@ -42,8 +42,8 @@ don't need to retest things you have already tested (like basic POST and GET).
   label: <label _id RI>,
   released: <4-digit year RN>,
   band: [{
-    artist: <name of character S>,
-    actor: <actor _id RI>
+    instrument: <name of instrument S>,
+    artist: <artist _id RI>
   }]
 }
 ```
@@ -52,9 +52,13 @@ don't need to retest things you have already tested (like basic POST and GET).
 
 ```
 {
-  name: <name RS>,
-  dob: <date-of-birth D>,
-  pob: <place-of-birth S>
+   name: {
+    type: String,
+    required: true
+  },
+  instrument: String,
+  dateofBirth: Date,
+  dateofDeath: Date
 }
 ```
 
