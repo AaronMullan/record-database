@@ -79,7 +79,7 @@ don't need to retest things you have already tested (like basic POST and GET).
   record: <record-id RI>
   user: <user _id RI>
   condition: <text S>,
-  notes: <S>,
+  notes: <text S>,
 }
 ```
 

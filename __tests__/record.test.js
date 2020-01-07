@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const Record = require('../lib/models/Record');
 
 
-describe('app routes', () => {
+describe('record routes', () => {
   beforeAll(() => {
     connect();
   });
@@ -42,6 +42,7 @@ describe('app routes', () => {
         artist: 'Can',
         artist_id: 17203,
         master_id: 11693,
+        personel:[],
         year: 1972
       })
       .then(res => {
@@ -52,6 +53,7 @@ describe('app routes', () => {
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
+          personel:[],
           year: 1972,
           __v: 0
         });
@@ -68,6 +70,7 @@ describe('app routes', () => {
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
+          personel:[],
           year: 1972,
           __v: 0
         });
@@ -84,6 +87,7 @@ describe('app routes', () => {
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
+          personel:[],
           year: 1972,
           __v: 0
         });
@@ -106,6 +110,7 @@ describe('app routes', () => {
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
+          personel:[],
           year: 1972,
           __v: 0
         });
@@ -126,6 +131,7 @@ describe('app routes', () => {
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
+          personel:[],
           year: 1972,
           __v: 0
         });
