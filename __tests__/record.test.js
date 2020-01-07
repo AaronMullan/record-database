@@ -16,6 +16,7 @@ describe('record routes', () => {
 
   let label;
   let record;
+  let artist;
   beforeEach(async() => {
     label = await Label.create({
       name: 'Arbitrary Signs',
@@ -57,7 +58,7 @@ describe('record routes', () => {
         artist: 'Can',
         artist_id: 17203,
         master_id: 11693,
-        personel:[],
+        personnel: [artist._id],
         year: 1972
       })
       .then(res => {
@@ -68,7 +69,7 @@ describe('record routes', () => {
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
-          personel:[],
+          personnel: [artist._id.toString()],
           year: 1972,
           __v: 0
         });
@@ -85,7 +86,7 @@ describe('record routes', () => {
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
-          personel:[],
+          personnel:[],
           year: 1972,
           __v: 0
         });
@@ -102,7 +103,7 @@ describe('record routes', () => {
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
-          personel:[],
+          personnel:[],
           year: 1972,
           __v: 0
         });
@@ -125,7 +126,7 @@ describe('record routes', () => {
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
-          personel:[],
+          personnel:[],
           year: 1972,
           __v: 0
         });
@@ -146,7 +147,7 @@ describe('record routes', () => {
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
-          personel:[],
+          personnel:[],
           year: 1972,
           __v: 0
         });

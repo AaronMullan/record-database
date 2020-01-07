@@ -97,7 +97,7 @@ describe('label routes', () => {
             artist_id: 135478,
             master_id: 39371,
             year: 1977, 
-            personel: [],
+            personnel: [],
             __v: 0
           }]
         });    
@@ -124,7 +124,7 @@ describe('label routes', () => {
             artist_id: 135478,
             master_id: 39371,
             year: 1977, 
-            personel: [],
+            personnel: [],
             __v: 0
           }]
         }]);       
