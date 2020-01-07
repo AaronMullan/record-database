@@ -5,6 +5,7 @@ const app = require('../lib/app');
 const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 const Label = require('../lib/models/Label');
+const Record = require('../lib/models/Record');
 
 describe('label routes', () => {
   beforeAll(() => {
@@ -15,6 +16,8 @@ describe('label routes', () => {
   });
 
   let label;
+  let record;
+  
   beforeEach(async() => {
     label = await Label.create({
       name: 'Arbitrary Signs',
@@ -23,6 +26,14 @@ describe('label routes', () => {
         { state: 'Massachusetts' },
         { country: 'USA' }
       ]
+    });
+    record = await Record.create({
+      title: 'Rocket to Russia',
+      label: label._id,
+      artist: 'Ramones',
+      artist_id: 135478,
+      master_id: 39371,
+      year: 1977,
     });
   });
 
@@ -48,7 +59,8 @@ describe('label routes', () => {
           {  state: 'Massachusetts' },
           {  country: 'USA' }
         ],
-        __v: 0
+        __v: 0,
+        id: expect.any(String),
       });
       });
   });
@@ -59,6 +71,7 @@ describe('label routes', () => {
       .then(res => {
         expect(res.body).toContainEqual({
           _id: expect.any(String),
+          id: expect.any(String),
           name: 'Arbitrary Signs',
         });    
       });
@@ -67,16 +80,26 @@ describe('label routes', () => {
     return request(app)
       .get(`/api/v1/labels/${label.id}`)
       .then(res => {
-        console.log(res.body);
         expect(res.body).toEqual({
           _id: label.id,
+          id: expect.any(String),
           name: 'Arbitrary Signs',
           address: [ 
             {  city: 'Northampton' },
             {  state: 'Massachusetts' },
             {  country: 'USA' }
           ],
-          __v: 0
+          __v: 0, 
+          records: [{ title: 'Rocket to Russia',
+            _id: record.id,
+            label: label.id,
+            artist: 'Ramones',
+            artist_id: 135478,
+            master_id: 39371,
+            year: 1977, 
+            personel: [],
+            __v: 0
+          }]
         });    
       });
   });
@@ -84,16 +107,27 @@ describe('label routes', () => {
     return request(app)
       .get(`/api/v1/labels/name/${label.name}`)
       .then(res => {
-        expect(res.body).toContainEqual({
-          _id: expect.any(String),
-          name: label.name,
+        expect(res.body).toEqual([{
+          _id: label.id,
+          id: expect.any(String),
+          name: 'Arbitrary Signs',
           address: [ 
             {  city: 'Northampton' },
             {  state: 'Massachusetts' },
             {  country: 'USA' }
           ],
-          __v: 0
-        });    
+          __v: 0, 
+          records: [{ title: 'Rocket to Russia',
+            _id: record.id,
+            label: label.id,
+            artist: 'Ramones',
+            artist_id: 135478,
+            master_id: 39371,
+            year: 1977, 
+            personel: [],
+            __v: 0
+          }]
+        }]);       
       });
   });
 });

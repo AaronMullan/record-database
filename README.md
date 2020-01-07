@@ -119,17 +119,12 @@ While the schemas should look like the data definitions above, these are descrip
     title,
     released,
     label: { _id, name },
-    band: [{
+    personnel: [{
         _id,
         role,
-        actor: { _id, name }
+        artist: { _id, name }
     }],
-    reviews: [{
-        id,
-        rating,
-        review,
-        user: { _id, name }
-    ]
+    
 }
 ```
 

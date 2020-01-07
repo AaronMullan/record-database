@@ -6,6 +6,7 @@ const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 const Record = require('../lib/models/Record');
 const Label = require('../lib/models/Label');
+const Artist = require('../lib/models/Artist');
 
 
 describe('record routes', () => {
@@ -32,7 +33,11 @@ describe('record routes', () => {
       master_id: 11693,
       year: 1972
     });
-
+    artist = await Artist.create({
+      name: 'Jaki Liebezeit',
+      instrument: 'drums',
+      discogsID: 48582,
+    });
   });
 
   afterAll(() => {
