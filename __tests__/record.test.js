@@ -5,6 +5,7 @@ const app = require('../lib/app');
 const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 const Record = require('../lib/models/Record');
+const Label = require('../lib/models/Label');
 
 
 describe('record routes', () => {
@@ -12,17 +13,26 @@ describe('record routes', () => {
     connect();
   });
 
-  
+  let label;
   let record;
   beforeEach(async() => {
+    label = await Label.create({
+      name: 'Arbitrary Signs',
+      address: [ 
+        { city: 'Northampton' },
+        { state: 'Massachusetts' },
+        { country: 'USA' }
+      ]
+    });
     record = await Record.create({
       title: 'Ege Bamyasi',
       artist: 'Can',
-      label: 'United Artists',
+      label: label._id,
       artist_id: 17203,
       master_id: 11693,
       year: 1972
     });
+
   });
 
   afterAll(() => {
@@ -38,7 +48,7 @@ describe('record routes', () => {
       .post('/api/v1/records')
       .send({
         title: 'Ege Bamyasi',
-        label: 'United Artists',
+        label: label._id,
         artist: 'Can',
         artist_id: 17203,
         master_id: 11693,
@@ -49,7 +59,7 @@ describe('record routes', () => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           title: 'Ege Bamyasi',
-          label: 'United Artists',
+          label: label._id.toString(),
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
@@ -66,7 +76,7 @@ describe('record routes', () => {
         expect(res.body).toEqual({
           _id:record.id,
           title: 'Ege Bamyasi',
-          label: 'United Artists',
+          label: label._id.toString(),
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
@@ -83,7 +93,7 @@ describe('record routes', () => {
         expect(res.body).toContainEqual({
           _id: expect.any(String),
           title: 'Ege Bamyasi',
-          label: 'United Artists',
+          label: label._id.toString(),
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
@@ -106,7 +116,7 @@ describe('record routes', () => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           title: 'Monster Movie',
-          label: 'United Artists',
+          label: label._id.toString(),
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
@@ -127,7 +137,7 @@ describe('record routes', () => {
         expect(res.body).toEqual({
           _id:record.id,
           title: 'Ege Bamyasi',
-          label: 'United Artists',
+          label: label._id.toString(),
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,

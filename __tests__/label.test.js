@@ -60,12 +60,6 @@ describe('label routes', () => {
         expect(res.body).toContainEqual({
           _id: expect.any(String),
           name: 'Arbitrary Signs',
-          address: [ 
-            {  city: 'Northampton' },
-            {  state: 'Massachusetts' },
-            {  country: 'USA' }
-          ],
-          __v: 0
         });    
       });
   });
@@ -73,6 +67,7 @@ describe('label routes', () => {
     return request(app)
       .get(`/api/v1/labels/${label.id}`)
       .then(res => {
+        console.log(res.body);
         expect(res.body).toEqual({
           _id: label.id,
           name: 'Arbitrary Signs',
@@ -84,7 +79,22 @@ describe('label routes', () => {
           __v: 0
         });    
       });
-
+  });
+  it('gets a label by name', () => {
+    return request(app)
+      .get(`/api/v1/labels/name/${label.name}`)
+      .then(res => {
+        expect(res.body).toContainEqual({
+          _id: expect.any(String),
+          name: label.name,
+          address: [ 
+            {  city: 'Northampton' },
+            {  state: 'Massachusetts' },
+            {  country: 'USA' }
+          ],
+          __v: 0
+        });    
+      });
   });
 });
 
