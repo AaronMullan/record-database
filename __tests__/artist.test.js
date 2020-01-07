@@ -11,13 +11,14 @@ describe('artist routes', () => {
     connect();
   });
   let artist;
+  beforeEach(() => {
+    return mongoose.connection.dropDatabase();
+  });
   beforeEach(async() => {
     artist = await Artist.create({
       name: 'Sister Rosetta Tharpe',
       instrument: 'guitar',
       discogsID: 322295,
-      dateofBirth: '1915-03-20',
-      dateofDeath: '1973-10-08'
     });
   });
   afterAll(() => {
@@ -27,18 +28,44 @@ describe('artist routes', () => {
     return request(app)
       .post('/api/v1/artists')
       .send({
-        name: 'Sister Rosetta Tharpe',
+        name: 'Sarah Louise',
         instrument: 'guitar',
-        discogsID: 322295,
-        
+        discogsID: 4289077
       })
-      .then(res => {expect(res.body).toEqual({
-        _id: expect.any(String),
-        name: 'Sister Rosetta Tharpe',
-        instrument: 'guitar',
-        discogsID: 322295,
-        __v: 0
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: expect.any(String),
+          name: 'Sarah Louise',
+          instrument: 'guitar',
+          discogsID: 4289077,
+          __v: 0
+        });
       });
+  });
+  it('can get all artists', () => {
+    return request(app)
+      .get('/api/v1/artists')
+      .then(res => {
+        expect(res.body).toContainEqual({
+          _id: expect.any(String),
+          name: 'Sister Rosetta Tharpe',
+          instrument: 'guitar',
+          discogsID: 322295,
+          __v: 0
+        });
+      });
+  });
+  it('can find an artist by id', () => {
+    return request(app)
+      .get(`/api/v1/artists/${artist.id}`)
+      .then(res =>{
+        expect(res.body).toEqual({
+          _id: expect.any(String),
+          name: 'Sister Rosetta Tharpe',
+          instrument: 'guitar',
+          discogsID: 322295,
+          __v: 0
+        });
       });
   });
 });
