@@ -103,32 +103,6 @@ describe('label routes', () => {
         });    
       });
   });
-  it('gets a label by name', () => {
-    return request(app)
-      .get(`/api/v1/labels/name/${label.name}`)
-      .then(res => {
-        expect(res.body).toEqual([{
-          _id: label.id,
-          id: expect.any(String),
-          name: 'Arbitrary Signs',
-          address: [ 
-            {  city: 'Northampton' },
-            {  state: 'Massachusetts' },
-            {  country: 'USA' }
-          ],
-          __v: 0, 
-          records: [{ title: 'Rocket to Russia',
-            _id: record.id,
-            label: label.id,
-            artist: 'Ramones',
-            artist_id: 135478,
-            master_id: 39371,
-            year: 1977, 
-            personnel: [],
-            __v: 0
-          }]
-        }]);       
-      });
-  });
+  
 });
 
