@@ -114,7 +114,7 @@ describe('record routes', () => {
 
     await agent
       .post('/api/v1/auth/signup')
-      .send({ email: 'test@tet.com', password: 'password' });
+      .send({ email: 'tes@tet.com', password: 'password' });
     return agent
       .patch(`/api/v1/records/${record.id}`)
       .send({ title: 'Monster Movie' })
@@ -136,7 +136,7 @@ describe('record routes', () => {
     const agent = request.agent(app);
     await agent
       .post('/api/v1/auth/signup')
-      .send({ email: 'test@tet.com', password: 'password' });
+      .send({ email: 'tet@tet.com', password: 'password' });
     return agent
       .delete(`/api/v1/records/${record.id}`)
       .then(res => {

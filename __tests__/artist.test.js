@@ -49,9 +49,7 @@ describe('artist routes', () => {
         expect(res.body).toContainEqual({
           _id: expect.any(String),
           name: 'Sister Rosetta Tharpe',
-          instrument: 'guitar',
           discogsID: 322295,
-          __v: 0
         });
       });
   });
