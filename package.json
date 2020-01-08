@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "test:coverage": "vue-cli-service test:unit --coverage",
   "scripts": {
-    "test": "jest --verbose --runInBand",
+    "test": "jest --verbose --coverage",
     "test:watch": "npm run test -- --watch",
     "start": "node server.js",
     "start:watch": "nodemon server.js"

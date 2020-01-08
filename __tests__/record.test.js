@@ -5,24 +5,39 @@ const app = require('../lib/app');
 const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 const Record = require('../lib/models/Record');
+const Label = require('../lib/models/Label');
+const Artist = require('../lib/models/Artist');
 
 
-describe('app routes', () => {
+describe('record routes', () => {
   beforeAll(() => {
     connect();
   });
 
-  beforeEach(() => {
-    return mongoose.connection.dropDatabase();
-  });
+  let label;
   let record;
+  let artist;
   beforeEach(async() => {
+    label = await Label.create({
+      name: 'Arbitrary Signs',
+      address: [ 
+        { city: 'Northampton' },
+        { state: 'Massachusetts' },
+        { country: 'USA' }
+      ]
+    });
     record = await Record.create({
       title: 'Ege Bamyasi',
       artist: 'Can',
+      label: label._id,
       artist_id: 17203,
       master_id: 11693,
       year: 1972
+    });
+    artist = await Artist.create({
+      name: 'Jaki Liebezeit',
+      instrument: 'drums',
+      discogsID: 48582,
     });
   });
 
@@ -39,18 +54,22 @@ describe('app routes', () => {
       .post('/api/v1/records')
       .send({
         title: 'Ege Bamyasi',
+        label: label._id,
         artist: 'Can',
         artist_id: 17203,
         master_id: 11693,
+        personnel: [artist._id],
         year: 1972
       })
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           title: 'Ege Bamyasi',
+          label: label._id.toString(),
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
+          personnel: [artist._id.toString()],
           year: 1972,
           __v: 0
         });
@@ -63,9 +82,11 @@ describe('app routes', () => {
         expect(res.body).toEqual({
           _id:record.id,
           title: 'Ege Bamyasi',
+          label: label._id.toString(),
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
+          personnel:[],
           year: 1972,
           __v: 0
         });
@@ -78,9 +99,11 @@ describe('app routes', () => {
         expect(res.body).toContainEqual({
           _id: expect.any(String),
           title: 'Ege Bamyasi',
+          label: label._id.toString(),
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
+          personnel:[],
           year: 1972,
           __v: 0
         });
@@ -91,7 +114,7 @@ describe('app routes', () => {
 
     await agent
       .post('/api/v1/auth/signup')
-      .send({ email: 'test@tet.com', password: 'password' });
+      .send({ email: 'tes@tet.com', password: 'password' });
     return agent
       .patch(`/api/v1/records/${record.id}`)
       .send({ title: 'Monster Movie' })
@@ -99,9 +122,11 @@ describe('app routes', () => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           title: 'Monster Movie',
+          label: label._id.toString(),
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
+          personnel:[],
           year: 1972,
           __v: 0
         });
@@ -111,16 +136,18 @@ describe('app routes', () => {
     const agent = request.agent(app);
     await agent
       .post('/api/v1/auth/signup')
-      .send({ email: 'test@tet.com', password: 'password' });
+      .send({ email: 'tet@tet.com', password: 'password' });
     return agent
       .delete(`/api/v1/records/${record.id}`)
       .then(res => {
         expect(res.body).toEqual({
           _id:record.id,
           title: 'Ege Bamyasi',
+          label: label._id.toString(),
           artist: 'Can',
           artist_id: 17203,
           master_id: 11693,
+          personnel:[],
           year: 1972,
           __v: 0
         });
