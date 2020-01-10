@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1578522044548" clover="3.2.0">
-  <project timestamp="1578522044548" name="All files">
-    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0"/>
+<coverage generated="1578620243657" clover="3.2.0">
+  <project timestamp="1578620243657" name="All files">
+    <metrics statements="39" coveredstatements="39" conditionals="6" coveredconditionals="6" methods="19" coveredmethods="19" elements="64" coveredelements="64" complexity="0" loc="39" ncloc="39" packages="1" files="2" classes="2"/>
+    <file name="data-helpers.js" path="/Users/aaronmullan/alchemy/record-collection/record-database/lib/helpers/data-helpers.js">
+      <metrics statements="23" coveredstatements="23" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="9"/>
+      <line num="1" count="3" type="stmt"/>
+      <line num="2" count="3" type="stmt"/>
+      <line num="3" count="3" type="stmt"/>
+      <line num="4" count="3" type="stmt"/>
+      <line num="5" count="3" type="stmt"/>
+      <line num="6" count="3" type="stmt"/>
+      <line num="7" count="3" type="stmt"/>
+      <line num="8" count="3" type="stmt"/>
+      <line num="10" count="3" type="stmt"/>
+      <line num="11" count="3" type="stmt"/>
+      <line num="14" count="3" type="stmt"/>
+      <line num="15" count="11" type="stmt"/>
+      <line num="18" count="3" type="stmt"/>
+      <line num="19" count="11" type="stmt"/>
+      <line num="22" count="3" type="stmt"/>
+      <line num="23" count="3" type="stmt"/>
+      <line num="26" count="55" type="stmt"/>
+      <line num="28" count="3" type="stmt"/>
+      <line num="29" count="12" type="stmt"/>
+      <line num="31" count="12" type="stmt"/>
+      <line num="32" count="5" type="stmt"/>
+      <line num="33" count="3" type="stmt"/>
+      <line num="37" count="3" type="stmt"/>
+    </file>
+    <file name="seed.js" path="/Users/aaronmullan/alchemy/record-collection/record-database/lib/helpers/seed.js">
+      <metrics statements="16" coveredstatements="16" conditionals="6" coveredconditionals="6" methods="10" coveredmethods="10"/>
+      <line num="1" count="3" type="stmt"/>
+      <line num="2" count="3" type="stmt"/>
+      <line num="3" count="3" type="stmt"/>
+      <line num="4" count="3" type="stmt"/>
+      <line num="5" count="3" type="stmt"/>
+      <line num="6" count="3" type="stmt"/>
+      <line num="8" count="3" type="cond" truecount="6" falsecount="0"/>
+      <line num="9" count="110" type="stmt"/>
+      <line num="17" count="1100" type="stmt"/>
+      <line num="24" count="550" type="stmt"/>
+      <line num="26" count="5500" type="stmt"/>
+      <line num="27" count="55000" type="stmt"/>
+      <line num="33" count="275" type="stmt"/>
+      <line num="37" count="2200" type="stmt"/>
+      <line num="38" count="55000" type="stmt"/>
+      <line num="39" count="110000" type="stmt"/>
+    </file>
   </project>
 </coverage>

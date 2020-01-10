@@ -1,49 +1,10 @@
 require('dotenv').config();
-
+const { getRecord, getRecords } = require('../lib/helpers/data-helpers');
 const request = require('supertest');
 const app = require('../lib/app');
-const connect = require('../lib/utils/connect');
-const mongoose = require('mongoose');
-const Record = require('../lib/models/Record');
-const Label = require('../lib/models/Label');
-const Artist = require('../lib/models/Artist');
-
 
 describe('record routes', () => {
-  beforeAll(() => {
-    connect();
-  });
 
-  let label;
-  let record;
-  let artist;
-  beforeEach(async() => {
-    label = await Label.create({
-      name: 'Arbitrary Signs',
-      address: [ 
-        { city: 'Northampton' },
-        { state: 'Massachusetts' },
-        { country: 'USA' }
-      ]
-    });
-    record = await Record.create({
-      title: 'Ege Bamyasi',
-      artist: 'Can',
-      label: label._id,
-      artist_id: 17203,
-      master_id: 11693,
-      year: 1972
-    });
-    artist = await Artist.create({
-      name: 'Jaki Liebezeit',
-      instrument: 'drums',
-      discogsID: 48582,
-    });
-  });
-
-  afterAll(() => {
-    return mongoose.connection.close();
-  });
   it('can create a new record', async() => {
     const agent = request.agent(app);
 
@@ -54,101 +15,96 @@ describe('record routes', () => {
       .post('/api/v1/records')
       .send({
         title: 'Ege Bamyasi',
-        label: label._id,
+        label: '5e1775bc720ed2a68425d619',
         artist: 'Can',
-        artist_id: 17203,
-        master_id: 11693,
-        personnel: [artist._id],
+        discogsArtistId: 17203,
+        discogsMasterId: 11693,
+        personnel: ['5e1775505fe617a641bbe69b'],
         year: 1972
       })
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           title: 'Ege Bamyasi',
-          label: label._id.toString(),
+          label: expect.any(String),
           artist: 'Can',
-          artist_id: 17203,
-          master_id: 11693,
-          personnel: [artist._id.toString()],
+          discogsArtistId: 17203,
+          discogsMasterId: 11693,
+          personnel: ['5e1775505fe617a641bbe69b'],
           year: 1972,
           __v: 0
         });
       });
   });
-  it('gets a record by id', () => {
-    return request(app)
-      .get(`/api/v1/records/${record.id}`)
-      .then(res => {
-        expect(res.body).toEqual({
-          _id:record.id,
-          title: 'Ege Bamyasi',
-          label: label._id.toString(),
-          artist: 'Can',
-          artist_id: 17203,
-          master_id: 11693,
-          personnel:[],
-          year: 1972,
-          __v: 0
-        });
-      });
-  });
-  it('gets all records', () => {
+  it('gets all records', async() => {
+    const records = await getRecords();
+
     return request(app)
       .get('/api/v1/records')
       .then(res => {
-        expect(res.body).toContainEqual({
-          _id: expect.any(String),
-          title: 'Ege Bamyasi',
-          label: label._id.toString(),
-          artist: 'Can',
-          artist_id: 17203,
-          master_id: 11693,
-          personnel:[],
-          year: 1972,
+        expect(res.body).toHaveLength(records.length);
+        records.forEach(record => {
+          expect(res.body).toContainEqual(record);
+        });
+      });
+  });
+  it('gets a record by id', async() => {
+    const record = await getRecord();
+    return request(app)
+      .get(`/api/v1/records/${record._id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: record._id,
+          title: record.title,
+          label: record.label,
+          year: record.year,
+          artist: record.artist,
+          personnel: expect.any(Array),
+          discogsMasterId: record.discogsMasterId,
           __v: 0
         });
       });
   });
   it('updates a record', async() => {
+    const record = await getRecord();
     const agent = request.agent(app);
 
     await agent
       .post('/api/v1/auth/signup')
       .send({ email: 'tes@tet.com', password: 'password' });
     return agent
-      .patch(`/api/v1/records/${record.id}`)
+      .patch(`/api/v1/records/${record._id}`)
       .send({ title: 'Monster Movie' })
       .then(res => {
         expect(res.body).toEqual({
-          _id: expect.any(String),
+          _id: record._id,
           title: 'Monster Movie',
-          label: label._id.toString(),
-          artist: 'Can',
-          artist_id: 17203,
-          master_id: 11693,
-          personnel:[],
-          year: 1972,
+          label: record.label,
+          year: record.year,
+          artist: record.artist,
+          personnel: expect.any(Array),
+          discogsMasterId: record.discogsMasterId,
           __v: 0
         });
       });
   });
   it('deletes a record', async() => {
+    const record = await getRecord();
     const agent = request.agent(app);
     await agent
       .post('/api/v1/auth/signup')
       .send({ email: 'tet@tet.com', password: 'password' });
     return agent
-      .delete(`/api/v1/records/${record.id}`)
+      .delete(`/api/v1/records/${record._id}`)
       .then(res => {
         expect(res.body).toEqual({
-          _id:record.id,
-          title: 'Ege Bamyasi',
-          label: label._id.toString(),
-          artist: 'Can',
-          artist_id: 17203,
-          master_id: 11693,
-          personnel:[],
-          year: 1972,
+          _id: record._id,
+          title: record.title,
+          label: record.label,
+          year: record.year,
+          artist: record.artist,
+          personnel: expect.any(Array),
+          discogsMasterId: record.discogsMasterId,
           __v: 0
         });
       });
