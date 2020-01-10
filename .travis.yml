@@ -1,6 +1,4 @@
-before_install:
-- export TZ=Canada/Pacific
 language: node_js
 node_js: node
 services: mongodb
-env: MONGODB_URI=mongodb://localhost:27017/travis
+env: MONGODB_URI=mongodb://localhost:27017/travis TZ=Canada/Pacific
