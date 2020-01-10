@@ -31,13 +31,7 @@ describe('artist routes', () => {
       .then(res => {
         expect(res.body).toHaveLength(artists.length);
         artists.forEach(artist => {
-          expect(res.body).toContainEqual({
-            _id: artist.id,
-            id: artist.id,
-            name: artist.name,
-            dateofBirth: artist.dateofBirth,
-            dateofDeath: artist.dateofDeath
-          });
+          expect(res.body).toContainEqual(artist);
         });  
       });
   });
