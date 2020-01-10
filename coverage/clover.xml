@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1578616156049" clover="3.2.0">
-  <project timestamp="1578616156049" name="All files">
+<coverage generated="1578617602434" clover="3.2.0">
+  <project timestamp="1578617602434" name="All files">
     <metrics statements="39" coveredstatements="39" conditionals="6" coveredconditionals="6" methods="19" coveredmethods="19" elements="64" coveredelements="64" complexity="0" loc="39" ncloc="39" packages="1" files="2" classes="2"/>
     <file name="data-helpers.js" path="/Users/aaronmullan/alchemy/record-collection/record-database/lib/helpers/data-helpers.js">
       <metrics statements="23" coveredstatements="23" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="9"/>
