@@ -3,51 +3,16 @@ const { getLabel, getLabels } = require('../lib/helpers/data-helpers');
 
 const request = require('supertest');
 const app = require('../lib/app');
-// const connect = require('../lib/utils/connect');
-// const mongoose = require('mongoose');
-// const Label = require('../lib/models/Label');
-// const Record = require('../lib/models/Record');
 
 describe('label routes', () => {
-  // beforeAll(() => {
-  //   connect();
-  // });
-  // beforeEach(() => {
-  //   return mongoose.connection.dropDatabase();
-  // });
 
-  // let label;
-  // let record;
-  
-  // beforeEach(async() => {
-  //   label = await Label.create({
-  //     name: 'Arbitrary Signs',
-  //     address: [ 
-  //       { city: 'Northampton' },
-  //       { state: 'Massachusetts' },
-  //       { country: 'USA' }
-  //     ]
-  //   });
-  //   record = await Record.create({
-  //     title: 'Rocket to Russia',
-  //     label: label._id,
-  //     artist: 'Ramones',
-  //     artist_id: 135478,
-  //     master_id: 39371,
-  //     year: 1977,
-  //   });
-  // });
-
-  // afterAll(() => {
-  //   return mongoose.connection.close();
-  // });
-  it('can create a new label', async() => {
+  it('can create a new label', () => {
     return request(app)
       .post('/api/v1/labels')
       .send({
         name: 'Arbitrary Minds',
         address: [ 
-          { city: 'Northampton' },
+          { city: 'Borthampton' },
           { state: 'Massachusetts' },
           { country: 'USA' }
         ]
@@ -56,7 +21,7 @@ describe('label routes', () => {
         _id: expect.any(String),
         name: 'Arbitrary Minds',
         address: [ 
-          {  city: 'Northampton' },
+          {  city: 'Borthampton' },
           {  state: 'Massachusetts' },
           {  country: 'USA' }
         ],
@@ -72,32 +37,31 @@ describe('label routes', () => {
     return request(app)
       .get('/api/v1/labels')
       .then(res => {
-        expect(res.body).toContainEqual({
-          _id: expect.any(String),
-          id: expect.any(String),
-          name: 'Arbitrary Signs',
+        expect(res.body).toHaveLength(labels.length);
+        labels.forEach(label => {
+          expect(res.body).toContainEqual({
+            _id: label.id,
+            id: label.id,
+            name: label.name
+
+          });
         });    
       });
   });
-  it('gets a label by id', () => {
-    const label = getLabel();
+  it('gets a label by id', async() => {
+    const label = await getLabel();
     return request(app)
-      .get(`/api/v1/labels/${label.id}`)
+      .get(`/api/v1/labels/${label._id}`)
       .then(res => {
         expect(res.body).toEqual({
+          __v: 0,
           _id: label.id,
-          id: expect.any(String),
-          name: 'Arbitrary Signs',
-          address: [ 
-            {  city: 'Northampton' },
-            {  state: 'Massachusetts' },
-            {  country: 'USA' }
-          ],
-          __v: 0, 
-        
+          id: label.id,
+          name: label.name,
+          address: label.address,
+          records: expect.any(Array)
         });    
       });
   });
-  
 });
 
