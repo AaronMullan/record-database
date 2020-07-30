@@ -1,5 +1,6 @@
 Record collection backend.  Test-driven design (Jest).  User Auth (Jason Web Token). MongoDB.
 
+=======
 ## Testing
 
 * Unit tests for models
@@ -8,7 +9,4 @@ Record collection backend.  Test-driven design (Jest).  User Auth (Jason Web Tok
 ## Deployment
 
 https://record-collecting.herokuapp.com/api/v1/
-
-
-
 
