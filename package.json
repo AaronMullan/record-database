@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "anychart": "^8.7.1",
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "chance": "^1.1.4",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.2.0",
